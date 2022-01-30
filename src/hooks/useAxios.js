@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export const useAxios = (url) => {
-  const [users, setUsers] = useState(null);
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -12,7 +12,7 @@ export const useAxios = (url) => {
       (async () => {
         try {
           await axios.get(url).then(({ data }) => {
-            setUsers(data);
+            setUser(data);
             setIsLoading(false);
           });
         } catch (err) {
@@ -24,5 +24,5 @@ export const useAxios = (url) => {
     }, 2000);
   }, [url]);
 
-  return { users, isLoading, error };
+  return { user, isLoading, error };
 };

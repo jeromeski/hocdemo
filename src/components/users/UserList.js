@@ -6,9 +6,11 @@ export default function UserList({
   return (
     <>
       {data &&
-        data.map((item) => (
-          <ItemComponent key={item.id} {...{ [resourceName]: item }} />
-        ))}
+        data
+          .slice(0, 5)
+          .map((item) => (
+            <ItemComponent key={item.id} {...{ [resourceName]: item }} />
+          ))}
     </>
   );
 }

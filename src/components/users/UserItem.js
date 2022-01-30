@@ -1,12 +1,12 @@
 export default function UserItem({ user }) {
-  const { name, username, email } = user;
-
-  return (
-    <div>
-      <h3>{name}</h3>
-      <p>{username}</p>
-      <pre>{email}</pre>
+  return user ? (
+    <>
+      <h3>{user.name}</h3>
+      <p>{user.username}</p>
+      <pre>{user.email}</pre>
       <hr />
-    </div>
+    </>
+  ) : (
+    <h1>Loading...</h1>
   );
 }

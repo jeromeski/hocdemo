@@ -1,26 +1,21 @@
-import { useEffect, useState } from "react";
-import UserList from "./components/users/UserList";
+// import UserList from "./components/users/UserList";
 import UserItem from "./components/users/UserItem";
 import { useAxios } from "./hooks/useAxios";
 import "./styles.css";
+import printProps from "./components/printProps";
+import { withUserLoader } from "./components/withUserLoader";
 
 export default function App() {
-  const [data, setData] = useState([]);
-  const baseUrl = "https://jsonplaceholder.typicode.com/users";
-  const { users, isLoading, error } = useAxios(baseUrl);
+  const baseUrl = "https://jsonplaceholder.typicode.com/users/1";
+  const { user } = useAxios(baseUrl);
+  const WrappedUserItem = printProps(UserItem);
 
-  useEffect(() => {
-    if (users) {
-      setData(users);
-    }
-  }, [users]);
+  const UserItemWithLoader = withUserLoader(UserItem, 3);
+
   return (
     <div className="App">
-      {isLoading && <h1>Loading...</h1>}
-      {!isLoading && !error && (
-        <UserList data={data} itemComponent={UserItem} resourceName="user" />
-      )}
-      {error && <h1>Error loading users.</h1>}
+      <WrappedUserItem user={user} a={0} b="sample" c={{ name: "babygirl" }} />
+      <UserItemWithLoader />
     </div>
   );
 }
