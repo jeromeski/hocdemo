@@ -25,7 +25,7 @@ export const withUserLoader = (Component, id) => {
           }
         })();
       }
-    }, [id]);
+    }, [error]);
 
     // then finally return Component passing props from state
     return <Component user={user} isLoading={isLoading} />;
