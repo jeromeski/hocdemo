@@ -1,21 +1,28 @@
 // import UserList from "./components/users/UserList";
-import UserItem from "./components/users/UserItem";
-import { useAxios } from "./hooks/useAxios";
+import UserItem from "./components/hoc-print-props/UserItem";
+// import { useAxios } from "./hooks/useAxios";
+import slugify from "slugify";
 import "./styles.css";
-import printProps from "./components/printProps";
-import { withUserLoader } from "./components/withUserLoader";
+import printProps from "./components/hoc-print-props/printProps";
+import { withUserLoader } from "./components/hoc-fetch-user/withUserLoader";
+import UserInfoForm from "./components/hoc-edit-user/UserInfoForm";
 
 export default function App() {
-  const baseUrl = "https://jsonplaceholder.typicode.com/users/1";
-  const { user } = useAxios(baseUrl);
-  const WrappedUserItem = printProps(UserItem);
+  let name = "Patricia Lebsack";
 
-  const UserItemWithLoader = withUserLoader(UserItem, 3);
+  const handleSlug = (id) => {
+    let slug = id.toLowerCase();
+    return slugify(slug);
+  };
+
+  const WrappedUserItem = printProps(UserItem);
+  const UserItemWithLoader = withUserLoader(UserItem, handleSlug(name));
 
   return (
     <div className="App">
-      <WrappedUserItem user={user} a={0} b="sample" c={{ name: "babygirl" }} />
+      <WrappedUserItem a={0} b="sample" c={{ name: "babygirl" }} />
       <UserItemWithLoader />
+      <UserInfoForm />
     </div>
   );
 }
