@@ -6,6 +6,8 @@ import "./styles.css";
 import printProps from "./components/hoc-print-props/printProps";
 import { withUserLoader } from "./components/hoc-fetch-user/withUserLoader";
 import UserInfoForm from "./components/hoc-edit-user/UserInfoForm";
+import withEditableResource from "./components/hoc-edit-user/withEditableResource";
+import UserInfo from "./components/hoc-edit-user/UserInfo";
 
 export default function App() {
   let name = "Patricia Lebsack";

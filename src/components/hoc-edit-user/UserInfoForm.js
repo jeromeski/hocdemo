@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import withEditableResource from "./withEditableResource";
 import withEditableUser from "./withEditableUser";
 
 let nameInput = "Dennis Schulist";
@@ -7,7 +8,7 @@ const handleSlug = (id) => {
   return slugify(slug);
 };
 
-const UserInfoForm = withEditableUser(
+const UserInfoForm = withEditableResource(
   ({ user, onChangeUser, resetUser, onSaveUser }) => {
     const { name, username, email } = user || {};
 
@@ -52,7 +53,10 @@ const UserInfoForm = withEditableUser(
       <h1>Loading...</h1>
     );
   },
-  handleSlug(nameInput)
+  `https://whispering-earth-86544.herokuapp.com/api/user/${handleSlug(
+    nameInput
+  )}`,
+  "user"
 );
 
 export default UserInfoForm;
